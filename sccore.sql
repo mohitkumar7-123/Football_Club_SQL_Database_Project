@@ -1,4 +1,126 @@
---Show all players from English nationality
+--Show 
+-- FOOTBALL CLUB DATABASE
+
+-- PLAYERS TABLE
+CREATE TABLE players (
+    player_id INT PRIMARY KEY,
+    player_name VARCHAR(100),
+    position VARCHAR(20),
+    nationality VARCHAR(50),
+    date_of_birth DATE,
+    jersey_number INT,
+    market_value DECIMAL(10,2),
+    weekly_salary DECIMAL(10,2),
+    contract_end_date DATE
+);
+
+-- TEAMS TABLE
+CREATE TABLE teams (
+    team_id INT PRIMARY KEY,
+    team_name VARCHAR(100),
+    city VARCHAR(50),
+    stadium VARCHAR(100),
+    founded_year INT,
+    manager VARCHAR(100),
+    budget DECIMAL(12,2)
+);
+
+-- MATCHES TABLE
+CREATE TABLE matches (
+    match_id INT PRIMARY KEY,
+    home_team_id INT,
+    away_team_id INT,
+    match_date DATE,
+    stadium VARCHAR(100),
+    competition VARCHAR(50),
+    home_team_score INT,
+    away_team_score INT,
+    attendance INT,
+    FOREIGN KEY (home_team_id) REFERENCES teams(team_id),
+    FOREIGN KEY (away_team_id) REFERENCES teams(team_id)
+);
+
+-- PLAYER_STATS TABLE
+CREATE TABLE player_stats (
+    stat_id INT PRIMARY KEY,
+    player_id INT,
+    match_id INT,
+    goals INT,
+    assists INT,
+    minutes_played INT,
+    yellow_cards INT,
+    red_cards INT,
+    passes_completed INT,
+    FOREIGN KEY (player_id) REFERENCES players(player_id),
+    FOREIGN KEY (match_id) REFERENCES matches(match_id)
+);
+
+-- TRANSFERS TABLE
+CREATE TABLE transfers (
+    transfer_id INT PRIMARY KEY,
+    player_id INT,
+    from_team_id INT,
+    to_team_id INT,
+    transfer_date DATE,
+    transfer_fee DECIMAL(12,2),
+    contract_length_years INT,
+    FOREIGN KEY (player_id) REFERENCES players(player_id),
+    FOREIGN KEY (from_team_id) REFERENCES teams(team_id),
+    FOREIGN KEY (to_team_id) REFERENCES teams(team_id)
+);
+
+-- INSERT TEAMS
+INSERT INTO teams VALUES
+(1, 'Manchester United', 'Manchester', 'Old Trafford', 1878, 'Erik ten Hag', 500000000),
+(2, 'Manchester City', 'Manchester', 'Etihad Stadium', 1880, 'Pep Guardiola', 600000000),
+(3, 'Liverpool FC', 'Liverpool', 'Anfield', 1892, 'Jurgen Klopp', 450000000),
+(4, 'Chelsea FC', 'London', 'Stamford Bridge', 1905, 'Mauricio Pochettino', 480000000),
+(5, 'Arsenal FC', 'London', 'Emirates Stadium', 1886, 'Mikel Arteta', 420000000);
+
+-- INSERT PLAYERS
+INSERT INTO players VALUES
+(101, 'Marcus Rashford', 'Forward', 'English', '1997-10-31', 10, 80000000, 200000, '2025-06-30'),
+(102, 'Kevin De Bruyne', 'Midfielder', 'Belgian', '1991-06-28', 17, 75000000, 350000, '2026-06-30'),
+(103, 'Mohamed Salah', 'Forward', 'Egyptian', '1992-06-15', 11, 90000000, 350000, '2025-06-30'),
+(104, 'Erling Haaland', 'Forward', 'Norwegian', '2000-07-21', 9, 180000000, 375000, '2027-06-30'),
+(105, 'Bukayo Saka', 'Midfielder', 'English', '2001-09-05', 7, 120000000, 195000, '2027-06-30'),
+(106, 'Bruno Fernandes', 'Midfielder', 'Portuguese', '1994-09-08', 8, 85000000, 240000, '2026-06-30'),
+(107, 'Virgil van Dijk', 'Defender', 'Dutch', '1991-07-08', 4, 45000000, 220000, '2025-06-30'),
+(108, 'Rodri', 'Midfielder', 'Spanish', '1996-06-22', 16, 90000000, 180000, '2027-06-30'),
+(109, 'Declan Rice', 'Midfielder', 'English', '1999-01-14', 41, 100000000, 250000, '2028-06-30'),
+(110, 'William Saliba', 'Defender', 'French', '2001-03-24', 2, 65000000, 150000, '2027-06-30');
+
+-- INSERT MATCHES
+INSERT INTO matches VALUES
+(1001, 1, 2, '2024-03-03', 'Old Trafford', 'Premier League', 2, 1, 74310),
+(1002, 3, 4, '2024-03-02', 'Anfield', 'Premier League', 3, 1, 53289),
+(1003, 5, 1, '2024-02-24', 'Emirates Stadium', 'Premier League', 2, 2, 60284),
+(1004, 2, 3, '2024-02-17', 'Etihad Stadium', 'Premier League', 1, 1, 53400),
+(1005, 4, 5, '2024-02-10', 'Stamford Bridge', 'Premier League', 0, 1, 40043);
+
+-- INSERT PLAYER_STATS
+INSERT INTO player_stats VALUES
+(1, 101, 1001, 1, 1, 90, 0, 0, 42),
+(2, 102, 1001, 0, 1, 85, 1, 0, 65),
+(3, 104, 1001, 1, 0, 90, 0, 0, 28),
+(4, 103, 1002, 2, 0, 90, 0, 0, 38),
+(5, 105, 1003, 1, 1, 90, 0, 0, 47),
+(6, 106, 1003, 1, 0, 90, 1, 0, 52),
+(7, 107, 1004, 0, 0, 90, 0, 0, 58),
+(8, 108, 1004, 0, 0, 90, 1, 0, 71),
+(9, 109, 1005, 0, 0, 90, 0, 0, 49),
+(10, 110, 1005, 0, 0, 90, 0, 0, 45);
+
+-- INSERT TRANSFERS
+INSERT INTO transfers VALUES
+(1, 104, 7, 2, '2022-07-01', 60000000, 5),
+(2, 109, 6, 5, '2023-07-01', 105000000, 5),
+(3, 110, 8, 5, '2022-07-01', 30000000, 4),
+(4, 106, 9, 1, '2020-01-29', 55000000, 5),
+(5, 103, 10, 3, '2017-07-01', 42000000, 5);
+
+
+all players from English nationality
 SELECT * FROM players
 where nationality = 'English';
 
@@ -317,4 +439,5 @@ SELECT player_name, date_of_birth,
        EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) as age_years,
        AGE(CURRENT_DATE, date_of_birth) as exact_age
 FROM players;
+
 
