@@ -1,19 +1,3 @@
-# ===============================================================================
-# COPY-PASTE READY: NEW README FOR YOUR GITHUB
-# ===============================================================================
-# 
-# INSTRUCTIONS:
-# 1. Go to: https://github.com/mohitkumar7-123/Football_Club_SQL_Database_Project
-# 2. Click on README.md
-# 3. Click the pencil icon (Edit)
-# 4. Select all (Ctrl+A) and delete
-# 5. Copy EVERYTHING below this line
-# 6. Paste into GitHub
-# 7. Click "Commit changes"
-#
-# ===============================================================================
-# START COPYING FROM THE NEXT LINE ↓↓↓
-# ===============================================================================
 
 # ⚽ Football Club SQL Analytics & Performance Dashboard
 
@@ -318,4 +302,4 @@ This project is created for educational and portfolio purposes.
 
 ---
 
-*Last Updated: December 2024*
+
